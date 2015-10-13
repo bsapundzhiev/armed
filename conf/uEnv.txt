@@ -1,0 +1,6 @@
+fexfile=script.bin
+kernel=uImage
+extraargs=root=/dev/mmcblk0p2 console=tty0
+
+#extraargs=root=/dev/mmcblk0p2 loglevel=8 rootwait rw init=/init mac_addr=00:AE:99:A3:E4:AF
+#boot_mmc=fatload mmc 0 0x43000000 ${fexfile}; fatload mmc 0 0x48000000 ${kernel}; bootm 0x48000000

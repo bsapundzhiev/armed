@@ -1,0 +1,5 @@
+/linux-sunxi/
+/out/
+/tools/
+test.sh
+A13_kernel_howto.txt
