@@ -9,14 +9,20 @@ rootfs from http://ports.ubuntu.com/ armhf port
 Cross tools:
 ------------
 for x86 host machines:
-# sudo apt-get install qemu-user-static debootstrap binfmt-support
+  ```
+  # sudo apt-get install qemu-user-static debootstrap binfmt-support
+  ````
 
 Install:
 --------
 resotre:
-# sudo ddrescue -d -D --force armed-sunxi-a13.img /dev/sdX
+  ```
+  # sudo ddrescue -d -D --force armed-sunxi-a13.img /dev/sdX
+  ```
 save:
-# sudo dd if=/dev/sdd of=./armed-sunxi-a13.img bs=1M count=4096
+  ```
+  # sudo dd if=/dev/sdd of=./armed-sunxi-a13.img bs=1M count=4096
+  ```
 
 License:
 --------
