@@ -24,7 +24,7 @@ set -e
 set -x
 
 RELEASE=vivid
-BASEDIR=~/Desktop/armed/${RELEASE}
+BASEDIR=$(pwd)/${RELEASE}
 BUILDDIR=${BASEDIR}/build
 # I use a local caching proxy to save time/bandwidth; in this mode, the
 # local mirror is used to download almost everything, then the standard
