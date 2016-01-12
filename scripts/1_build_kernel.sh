@@ -25,6 +25,12 @@ else
     cp $KERNEL_DEFCONFIG .config
 fi
 
+if [ "menuconfig" = "$1" ]; then
+  echo "manual configuration..."
+  make ARCH=arm CROSS_COMPILE=$CROSS_TOOLKIT_PREFIX menuconfig
+  exit 1
+fi
+
 #
 # Update existing configuration for new kernel options 
 #

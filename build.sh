@@ -45,12 +45,12 @@ case "$1" in
 	exit 1
 esac
 
-if [ ! -d "linux-sunxi" ]; then
+if [ ! -d "linux-$KERNEL" ]; then
   	echo "Clone $GIT_REPO"
 	git clone $GIT_REPO
 fi
 
-sh scripts/1_build_kernel.sh
+sh scripts/1_build_kernel.sh "$2"
 
 ##test
 #sh ./test.sh
