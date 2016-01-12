@@ -12,6 +12,12 @@ for x86 host machines:
   ```
   # sudo apt-get install qemu-user-static debootstrap binfmt-support
   ````
+Build:
+
+	```
+	./build.sh tools
+	./buuld.sh [platform]
+	```
 
 Install:
 --------

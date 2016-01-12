@@ -6,9 +6,13 @@
 # Grab everything after the '=' character
 DOWNLOAD_TOOLKIT_URL=$(grep -i TOOLKIT_SOURCE_URL $CONFIG/config | cut -f2 -d'=')
 
-if [ -z "$DOWNLOAD_TOOLKIT_URL" ]; then
-	# Grab everything after the last '/' character
+if [ -n "$DOWNLOAD_TOOLKIT_URL" ]; then
+	echo # Grab everything after the last '/' character
 	ARCHIVE_TOOLKIT_FILE=${DOWNLOAD_TOOLKIT_URL##*/}
+
+	# Delete folder with previously extracted kernel
+	rm -rf tools
+	mkdir tools
 
 	cd tools
 
@@ -16,13 +20,8 @@ if [ -z "$DOWNLOAD_TOOLKIT_URL" ]; then
 	# -c option allows the download to resume
 	wget -c $DOWNLOAD_TOOLKIT_URL
 
-	# Delete folder with previously extracted kernel
-	#rm -rf tools
-	#mkdir tools
-
-	# Extract kernel to folder 'work/kernel'
-	# Full path will be something like 'work/kernel/linux-3.16.1'
-	#tar -xvf $ARCHIVE_TOOLKIT_FILE -C ../work/kernel
+	#extract 
+	tar -xvf $ARCHIVE_TOOLKIT_FILE #-C ../work/kernel
 	cd ..
 fi
 

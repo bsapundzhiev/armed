@@ -4,7 +4,7 @@
 # ARM
 # http://releases.linaro.org/14.11/components/toolchain/binaries/arm-linux-gnueabihf
 #
-#TOOLKIT_SOURCE_URL=http://releases.linaro.org/14.11/components/toolchain/binaries/arm-linux-gnueabihf/gcc-linaro-4.9-2014.11-x86_64_arm-linux-gnueabihf.tar.xz
+TOOLKIT_SOURCE_URL=http://releases.linaro.org/14.11/components/toolchain/binaries/arm-linux-gnueabihf/gcc-linaro-4.9-2014.11-x86_64_arm-linux-gnueabihf.tar.xz
 
 # You can find the latest Linux kernel source bundles here:
 #
