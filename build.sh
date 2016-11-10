@@ -33,7 +33,7 @@ case "$1" in
         orangepi)
    	echo "*** OrangePi2PC setup ***"
 	GIT_REPO="https://github.com/orangepi-xunlong/linux-sunxi.git"
-	export KERNEL_DEFCONFIG=$CONFIG/orangepi/sun7i_defconfig
+	export KERNEL_DEFCONFIG=$CONFIG/orangepi/sun8iw7p1smp_lobo_defconfig
             ;;   
         mkimage)
    	echo "Image setup"

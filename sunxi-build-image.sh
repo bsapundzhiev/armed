@@ -23,7 +23,7 @@
 set -e
 set -x
 
-RELEASE=vivid
+RELEASE=xenial
 BASEDIR=$(pwd)/${RELEASE}
 BUILDDIR=${BASEDIR}/build
 # I use a local caching proxy to save time/bandwidth; in this mode, the
