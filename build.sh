@@ -6,7 +6,6 @@
 #build root
 ROOT=`pwd`
 
-export KERNEL=sunxi
 export CONFIG=$ROOT/boards
 
 #product dir
@@ -26,14 +25,16 @@ case "$1" in
 	exit 1
             ;;
         a13)
-       	echo "*** A13 setup ***"
+        export KERNEL=sunxi
 	GIT_REPO="=https://github.com/linux-sunxi/linux-sunxi.git"
 	export KERNEL_DEFCONFIG=$CONFIG/a13/a13_linux_defconfig
             ;;   
         orangepi)
-   	echo "*** OrangePi2PC setup ***"
+        export KERNEL=4.9-rc4
+        export LOADADDR=0x48000000
 	GIT_REPO="https://github.com/orangepi-xunlong/linux-sunxi.git"
-	export KERNEL_DEFCONFIG=$CONFIG/orangepi/sun8iw7p1smp_lobo_defconfig
+	#export KERNEL_DEFCONFIG=$CONFIG/orangepi/sun8iw7p1smp_lobo_defconfig
+	export KERNEL_DEFCONFIG=$CONFIG/orangepi/sun8iw7p1_mainline_defconfig
             ;;   
         mkimage)
    	echo "Image setup"
@@ -41,7 +42,8 @@ case "$1" in
             ;;       
         *)
 
-	echo "Usage: $0 {tools|a13|orangepi|mkimage}"
+	echo "Usage: $0 {init|a13|orangepi|mkimage}"
+	echo "run init first for setup build tools"
 	exit 1
 esac
 
@@ -49,6 +51,9 @@ if [ ! -d "linux-$KERNEL" ]; then
   	echo "Clone $GIT_REPO"
 	git clone $GIT_REPO
 fi
+
+export VARIANT="$1"
+echo "*** $VARIANT setup ***"
 
 sh scripts/1_build_kernel.sh "$2"
 

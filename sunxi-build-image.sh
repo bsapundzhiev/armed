@@ -34,7 +34,7 @@ BUILDDIR=${BASEDIR}/build
 # Don't clobber an old build
 if [ -e "$BUILDDIR" ]; then
   echo "$BUILDDIR exists, not proceeding"
-  #exit 1
+  exit 1
 fi
 
 # Set up environment

@@ -3,3 +3,5 @@
 /tools/
 test.sh
 A13_kernel_howto.txt
+/linux-*/
+*.tar.xz

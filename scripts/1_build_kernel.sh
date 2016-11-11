@@ -45,7 +45,12 @@ make ARCH=$PLATFORM CROSS_COMPILE=$CROSS_TOOLKIT_PREFIX oldconfig
 # http://unix.stackexchange.com/questions/5518/what-is-the-difference-between-the-following-kernel-makefile-terms-vmlinux-vmlinux
 # make bzImage
 
-make ARCH=$PLATFORM CROSS_COMPILE=$CROSS_TOOLKIT_PREFIX -j4 uImage
+if [ -n $LOADADDR ]; then 
+	make ARCH=$PLATFORM CROSS_COMPILE=$CROSS_TOOLKIT_PREFIX -j4 uImage LOADADDR=$LOADADDR
+else
+	make ARCH=$PLATFORM CROSS_COMPILE=$CROSS_TOOLKIT_PREFIX -j4 uImage
+fi
+
 
 if [ -f arch/arm/boot/uImage ]; then 
 
