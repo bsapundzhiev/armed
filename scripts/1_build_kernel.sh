@@ -9,7 +9,7 @@ cd linux-$KERNEL
 if [ $? -ne 0 ]
   then
     echo "Error: Krenel tree is not found!"
-    exit 2   
+    exit 2
 fi
 
 # Change to the first directory ls finds, e.g. 'linux-3.18.6'
@@ -20,7 +20,7 @@ echo "* Checking the kernel configuration existence.."
 if [ -f .config ]
   then
     echo "* OK .config exists."
-else 
+else
     echo "* Copy default config.."
     cp $KERNEL_DEFCONFIG .config
 fi
@@ -31,8 +31,15 @@ if [ "menuconfig" = "$1" ]; then
   exit 1
 fi
 
+if [ "clean" = "$1" ]; then
+  echo "manual configuration..."
+  make ARCH=arm CROSS_COMPILE=$CROSS_TOOLKIT_PREFIX mrproper
+  rm -rf $OUTPUTDIR
+  exit 1
+fi
+
 #
-# Update existing configuration for new kernel options 
+# Update existing configuration for new kernel options
 #
 
 make ARCH=$PLATFORM CROSS_COMPILE=$CROSS_TOOLKIT_PREFIX oldconfig
@@ -45,14 +52,14 @@ make ARCH=$PLATFORM CROSS_COMPILE=$CROSS_TOOLKIT_PREFIX oldconfig
 # http://unix.stackexchange.com/questions/5518/what-is-the-difference-between-the-following-kernel-makefile-terms-vmlinux-vmlinux
 # make bzImage
 
-if [ -n $LOADADDR ]; then 
+if [ -n $LOADADDR ]; then
 	make ARCH=$PLATFORM CROSS_COMPILE=$CROSS_TOOLKIT_PREFIX -j4 uImage LOADADDR=$LOADADDR
 else
 	make ARCH=$PLATFORM CROSS_COMPILE=$CROSS_TOOLKIT_PREFIX -j4 uImage
 fi
 
 
-if [ -f arch/arm/boot/uImage ]; then 
+if [ -f arch/arm/boot/uImage ]; then
 
 	mkdir -p $OUTPUTDIR
 	cp -p arch/arm/boot/uImage $OUTPUTDIR
@@ -61,9 +68,9 @@ if [ -f arch/arm/boot/uImage ]; then
 	make ARCH=$PLATFORM CROSS_COMPILE=$CROSS_TOOLKIT_PREFIX -j4 INSTALL_MOD_PATH=$OUTPUTDIR modules_install
 #firmware install
 	mkdir -p $FIRMWAREDIR
-	make ARCH=$PLATFORM CROSS_COMPILE=$CROSS_TOOLKIT_PREFIX -j4 INSTALL_FW_PATH=$FIRMWAREDIR firmware_install 
+	make ARCH=$PLATFORM CROSS_COMPILE=$CROSS_TOOLKIT_PREFIX -j4 INSTALL_FW_PATH=$FIRMWAREDIR firmware_install
 
-else 
+else
 	echo "Error building kernel!"
 	exit 3
 fi
