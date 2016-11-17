@@ -34,6 +34,7 @@ case "$1" in
         GIT_REPO="https://github.com/orangepi-xunlong/linux-sunxi.git"
         #export KERNEL_DEFCONFIG=$CONFIG/orangepi/sun8iw7p1smp_lobo_defconfig
         export KERNEL_DEFCONFIG=$CONFIG/orangepi/sun8iw7p1_mainline_defconfig
+	mkimage -C none -A arm -T script -d "$CONFIG/orangepi/orangepi.cmd" "$OUTPUTDIR/boot.scr"
             ;;
         mkimage)
    	echo "Image setup"

@@ -21,7 +21,7 @@ if [ -f .config ]
   then
     echo "* OK .config exists."
 else
-    echo "* Copy default config.."
+    echo "* Copy config $KERNEL_DEFCONFIG --> .config"
     cp $KERNEL_DEFCONFIG .config
 fi
 
@@ -53,7 +53,7 @@ make ARCH=$PLATFORM CROSS_COMPILE=$CROSS_TOOLKIT_PREFIX oldconfig
 # make bzImage
 
 if [ -n $LOADADDR ]; then
-	make ARCH=$PLATFORM CROSS_COMPILE=$CROSS_TOOLKIT_PREFIX -j4 uImage LOADADDR=$LOADADDR
+	make ARCH=$PLATFORM CROSS_COMPILE=$CROSS_TOOLKIT_PREFIX -j4 uImage LOADADDR=$LOADADDR dtbs
 else
 	make ARCH=$PLATFORM CROSS_COMPILE=$CROSS_TOOLKIT_PREFIX -j4 uImage
 fi
@@ -69,7 +69,8 @@ if [ -f arch/arm/boot/uImage ]; then
 #firmware install
 	mkdir -p $FIRMWAREDIR
 	make ARCH=$PLATFORM CROSS_COMPILE=$CROSS_TOOLKIT_PREFIX -j4 INSTALL_FW_PATH=$FIRMWAREDIR firmware_install
-
+#dtbs
+	rsync -av arch/arm/boot/dts/*.dtb "$OUTPUTDIR/dts/"
 else
 	echo "Error building kernel!"
 	exit 3
